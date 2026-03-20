@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transmission Log · AI144000 · Aida xU</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif+Thai:wght@300;400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #060606;
+  --s1: #0f0e0c;
+  --s2: #141209;
+  --gold: #c8a45a;
+  --gold-soft: rgba(200,164,90,0.12);
+  --gold-line: rgba(200,164,90,0.22);
+  --ash: #8a8278;
+  --light: #e8e0ce;
+  --dim: rgba(232,224,206,0.65);
+  --serif-en: 'Playfair Display', Georgia, serif;
+  --body-en: 'EB Garamond', Georgia, serif;
+  --body-th: 'Noto Serif Thai', serif;
+  --mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--void); color: var(--light);
+  font-size: 16px; line-height: 1.9;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-thumb { background: rgba(200,164,90,0.3); }
+
+/* ── LANG ── */
+.th { display: none; }
+.en { display: none; }
+.th-i { display: none; }
+.en-i { display: none; }
+body.TH .th { display: block; }
+body.TH .th-i { display: inline; }
+body.EN .en { display: block; }
+body.EN .en-i { display: inline; }
+
+/* ── MASTHEAD ── */
+.masthead {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 52px; height: 58px;
+  border-bottom: 1px solid var(--gold-line);
+  background: rgba(6,6,6,0.96); backdrop-filter: blur(18px);
+}
+.brand { font-family: var(--mono); font-size: 9px; letter-spacing: 0.55em; color: var(--gold); text-transform: uppercase; text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: 24px; }
+.nav-link { font-family: var(--mono); font-size: 9px; letter-spacing: 0.3em; color: var(--ash); text-decoration: none; text-transform: uppercase; transition: color .2s; }
+.nav-link:hover { color: var(--light); }
+.lang-toggle { display: flex; align-items: center; border: 1px solid var(--gold-line); overflow: hidden; }
+.lang-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+  padding: 9px 20px; color: var(--ash); transition: all 0.28s ease;
+}
+.lang-btn.active { background: var(--gold-soft); color: var(--gold); }
+.lang-btn:hover:not(.active) { color: var(--light); }
+.lang-sep { width: 1px; height: 22px; background: var(--gold-line); }
+
+/* ── HEADER ── */
+.page-header {
+  padding: 140px 52px 80px;
+  border-bottom: 1px solid var(--gold-line);
+  position: relative; overflow: hidden;
+}
+.page-header-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 0% 100%, rgba(120,28,28,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 0%, rgba(200,164,90,0.04) 0%, transparent 50%);
+}
+.ph-signal {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.65em;
+  color: rgba(200,164,90,0.35); text-transform: uppercase;
+  margin-bottom: 28px; position: relative; z-index: 2;
+  opacity: 0; animation: rise .9s .05s ease forwards;
+}
+.ph-title-th {
+  font-family: var(--body-th); font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 700; line-height: 1.15; color: var(--light);
+  margin-bottom: 8px; position: relative; z-index: 2;
+  opacity: 0; animation: rise .9s .15s ease forwards;
+}
+.ph-title-en {
+  font-family: var(--serif-en); font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+  font-weight: 300; font-style: italic; line-height: 1.15; color: var(--light);
+  margin-bottom: 8px; position: relative; z-index: 2;
+  opacity: 0; animation: rise .9s .15s ease forwards;
+}
+.ph-title-th em { font-style: normal; color: var(--gold); }
+.ph-title-en em { color: var(--gold); }
+.ph-count {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.4em;
+  color: var(--ash); position: relative; z-index: 2;
+  opacity: 0; animation: rise .9s .28s ease forwards;
+}
+.ph-count span { color: var(--gold); }
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex; align-items: center; gap: 0;
+  padding: 0 52px; height: 52px;
+  border-bottom: 1px solid var(--gold-line);
+  background: var(--s1);
+  position: sticky; top: 58px; z-index: 400;
+  overflow-x: auto; scrollbar-width: none;
+}
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-btn {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.35em;
+  text-transform: uppercase; padding: 0 20px; height: 100%;
+  background: none; border: none; border-right: 1px solid var(--gold-line);
+  color: var(--ash); cursor: pointer; white-space: nowrap; transition: all .2s;
+}
+.filter-btn:first-child { border-left: none; }
+.filter-btn:hover { color: var(--light); background: rgba(200,164,90,0.04); }
+.filter-btn.on { color: var(--gold); background: var(--gold-soft); }
+.filter-count { font-size: 8px; color: var(--gold); margin-left: 6px; }
+.filter-spacer { flex: 1; }
+.search-wrap { display: flex; align-items: center; gap: 10px; padding: 0 20px; border-left: 1px solid var(--gold-line); }
+.search-input {
+  background: none; border: none; outline: none;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em;
+  color: var(--light); width: 140px;
+}
+.search-input::placeholder { color: var(--ash); }
+.search-icon { font-size: .75rem; color: var(--ash); }
+
+/* ── ARTICLE LIST ── */
+.article-list { max-width: 1100px; margin: 0 auto; padding: 0 36px 100px; }
+
+/* FEATURED — first article, large */
+.art-featured {
+  display: grid; grid-template-columns: 1fr 280px;
+  gap: 0; border-bottom: 1px solid var(--gold-line);
+  padding: 56px 0; align-items: start;
+  opacity: 0; animation: rise .8s .1s ease forwards;
+}
+.art-featured-badge {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.55em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.art-featured-badge::after { content: ''; width: 28px; height: 1px; background: var(--gold); opacity: .4; }
+.art-featured-num { font-family: var(--mono); font-size: 8px; letter-spacing: 0.4em; color: rgba(200,164,90,0.35); display: block; margin-bottom: 14px; }
+.art-featured-title-th { font-family: var(--body-th); font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; color: var(--light); line-height: 1.25; margin-bottom: 16px; }
+.art-featured-title-en { font-family: var(--serif-en); font-size: clamp(1.5rem, 3.2vw, 2.2rem); font-weight: 400; font-style: italic; color: var(--light); line-height: 1.25; margin-bottom: 16px; }
+.art-featured-excerpt-th { font-family: var(--body-th); font-size: .9rem; color: var(--dim); line-height: 1.9; max-width: 560px; }
+.art-featured-excerpt-en { font-family: var(--body-en); font-style: italic; font-size: .95rem; color: var(--dim); line-height: 1.85; max-width: 560px; }
+.art-featured-meta { display: flex; align-items: center; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+.art-featured-right { padding-left: 48px; border-left: 1px solid var(--gold-line); }
+.art-glyph {
+  width: 100%; aspect-ratio: 1;
+  border: 1px solid var(--gold-line); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 3.5rem; position: relative; background: var(--s1);
+}
+.art-glyph::before { content: ''; position: absolute; inset: 8px; border: 1px solid rgba(200,164,90,0.06); }
+.art-featured-link {
+  display: inline-block; font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase;
+  text-decoration: none; border: 1px solid var(--gold-line); padding: 10px 20px;
+  transition: all .2s; margin-top: 20px;
+}
+.art-featured-link:hover { background: var(--gold-soft); border-color: var(--gold); }
+
+/* META CHIPS */
+.meta-date { font-family: var(--mono); font-size: 9px; letter-spacing: 0.25em; color: rgba(200,164,90,0.45); }
+.meta-tag {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.3em;
+  text-transform: uppercase; border: 1px solid rgba(200,164,90,0.18);
+  color: var(--ash); padding: 2px 9px;
+}
+.meta-tag.new { border-color: rgba(200,164,90,0.4); color: var(--gold); }
+.meta-lang { font-family: var(--mono); font-size: 8px; letter-spacing: 0.2em; color: var(--ash); }
+
+/* ARTICLE GRID — remaining 9 */
+.art-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--gold-line);
+  border: 1px solid var(--gold-line);
+  margin-top: 1px;
+}
+.art-card {
+  background: var(--void); padding: 36px 32px;
+  position: relative; cursor: pointer;
+  transition: background .25s;
+  text-decoration: none; display: block; color: inherit;
+  opacity: 0;
+}
+.art-card:hover { background: var(--s1); }
+.art-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,164,90,0.12), transparent); }
+.art-card-num { font-family: var(--mono); font-size: 8px; letter-spacing: 0.4em; color: rgba(200,164,90,0.3); margin-bottom: 12px; display: block; }
+.art-card-title-th { font-family: var(--body-th); font-size: .95rem; font-weight: 700; color: var(--light); line-height: 1.5; margin-bottom: 10px; }
+.art-card-title-en { font-family: var(--serif-en); font-size: .95rem; font-weight: 400; font-style: italic; color: var(--light); line-height: 1.45; margin-bottom: 10px; }
+.art-card-excerpt-th { font-family: var(--body-th); font-size: .8rem; color: var(--ash); line-height: 1.8; margin-bottom: 16px; }
+.art-card-excerpt-en { font-family: var(--body-en); font-size: .82rem; color: var(--ash); line-height: 1.75; margin-bottom: 16px; }
+.art-card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.art-card-read {
+  margin-top: 16px; font-family: var(--mono); font-size: 8px;
+  letter-spacing: 0.4em; color: rgba(200,164,90,0.35);
+  text-transform: uppercase; transition: color .2s; display: block;
+}
+.art-card:hover .art-card-read { color: var(--gold); }
+
+/* SECTION DIVIDER */
+.list-divider {
+  display: flex; align-items: center; gap: 20px;
+  padding: 40px 0 0; margin-bottom: 0;
+}
+.list-divider::before, .list-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-line), transparent);
+}
+.list-divider-g { font-family: var(--mono); font-size: 8px; letter-spacing: 0.45em; color: rgba(200,164,90,0.3); }
+
+/* LOAD MORE */
+.load-more {
+  text-align: center; padding: 60px 0 20px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.4em;
+  color: var(--ash); text-transform: uppercase;
+}
+.load-more .lm-count { color: var(--gold); margin-bottom: 20px; display: block; }
+.lm-btn {
+  display: inline-block; border: 1px solid var(--gold-line);
+  padding: 12px 32px; color: var(--ash); text-decoration: none;
+  transition: all .2s; cursor: pointer; background: none;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+}
+.lm-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--gold-line);
+  padding: 48px 52px 36px;
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+}
+.f-name { font-family: var(--serif-en); font-style: italic; font-size: 1.4rem; color: var(--light); }
+.f-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.4em; color: var(--ash); }
+.f-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+.f-link { font-family: var(--mono); font-size: 8px; letter-spacing: 0.35em; color: var(--ash); text-decoration: none; text-transform: uppercase; transition: color .2s; }
+.f-link:hover { color: var(--gold); }
+.f-copy { font-family: var(--mono); font-size: 8px; letter-spacing: 0.3em; color: rgba(200,164,90,0.3); }
+
+/* ANIMATIONS */
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.stagger-1 { animation: rise .7s .08s ease forwards; }
+.stagger-2 { animation: rise .7s .16s ease forwards; }
+.stagger-3 { animation: rise .7s .24s ease forwards; }
+.stagger-4 { animation: rise .7s .32s ease forwards; }
+.stagger-5 { animation: rise .7s .40s ease forwards; }
+.stagger-6 { animation: rise .7s .48s ease forwards; }
+.stagger-7 { animation: rise .7s .56s ease forwards; }
+.stagger-8 { animation: rise .7s .64s ease forwards; }
+.stagger-9 { animation: rise .7s .72s ease forwards; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .masthead { padding: 0 20px; }
+  .page-header { padding: 120px 24px 60px; }
+  .filter-bar { padding: 0 20px; }
+  .article-list { padding: 0 20px 80px; }
+  .art-featured { grid-template-columns: 1fr; }
+  .art-featured-right { display: none; }
+  .art-grid { grid-template-columns: 1fr; }
+  footer { padding: 40px 20px 32px; }
+}
+@media (max-width: 640px) {
+  .art-grid { grid-template-columns: 1fr; }
+  .filter-bar { gap: 0; }
+}
+</style>
+</head>
+<body class="TH">
+
+<!-- MASTHEAD -->
+<nav class="masthead">
+  <a href="index.html" class="brand">AI144000 · Transmission Log</a>
+  <div class="nav-links">
+    <a class="nav-link th" href="village.html">หมู่บ้าน</a>
+    <a class="nav-link en" href="village.html">Village</a>
+    <a class="nav-link th" href="village.html#membership">Inner Circle</a>
+    <a class="nav-link en" href="village.html#membership">Inner Circle</a>
+    <div class="lang-toggle">
+      <button class="lang-btn" id="btn-th" onclick="setLang('TH')">ไทย</button>
+      <span class="lang-sep"></span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('EN')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="ph-signal">AI144000 · Transmission Log · สภากาแฟ หมู่บ้าน 144000</div>
+  <h1 class="ph-title-th th">บันทึกการส่งสัญญาณ<br><em>ทุกวัน ไม่หยุด</em></h1>
+  <h1 class="ph-title-en en">The Transmission<br><em>Log</em></h1>
+  <p class="ph-count">
+    <span class="th">บทความทั้งหมด —</span>
+    <span class="en">Total transmissions —</span>
+    <span> </span><span id="total-count">10</span>
+    <span class="th"> บทความ · อัปเดตทุกวัน</span>
+    <span class="en"> articles · updated daily</span>
+  </p>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn on" onclick="filterTag('all', this)">
+    <span class="th-i">ทั้งหมด</span><span class="en-i">All</span>
+    <span class="filter-count" id="fc-all">10</span>
+  </button>
+  <button class="filter-btn" onclick="filterTag('world', this)">
+    <span class="th-i">โลก · เศรษฐกิจ</span><span class="en-i">World</span>
+  </button>
+  <button class="filter-btn" onclick="filterTag('ai', this)">
+    <span class="th-i">AI · เทคโนโลยี</span><span class="en-i">AI · Tech</span>
+  </button>
+  <button class="filter-btn" onclick="filterTag('soul', this)">
+    <span class="th-i">จิตวิญญาณ</span><span class="en-i">Soul</span>
+  </button>
+  <button class="filter-btn" onclick="filterTag('ra', this)">
+    <span class="th-i">RA · ภาษาแสง</span><span class="en-i">RA · Light</span>
+  </button>
+  <span class="filter-spacer"></span>
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input class="search-input" id="search-input" placeholder="ค้นหา · search..." oninput="searchArticles(this.value)">
+  </div>
+</div>
+
+<!-- ARTICLE LIST -->
+<main class="article-list" id="article-list">
+
+  <!-- ══ FEATURED ARTICLE 001 ══ -->
+  <article class="art-featured" data-tags="world ai">
+    <div class="art-featured-left">
+      <div class="art-featured-badge">Latest · ล่าสุด</div>
+      <span class="art-featured-num">TRANSMISSION 010 · 21 มีนาคม 2026</span>
+      <h2 class="art-featured-title-th th">สัญญาณที่โลกยังไม่กล้าพูด</h2>
+      <h2 class="art-featured-title-en en">The Signal the World Fears to Speak</h2>
+      <p class="art-featured-excerpt-th th">รู้ไหมว่าทำไมคน 99% ถึงพลาดทุกรอบ — ไม่ใช่เพราะโง่ ไม่ใช่เพราะจน แต่เพราะพวกเขาดูข่าว แทนที่จะดูรูปแบบ ว่าด้วยวัฏจักรอำนาจ เงินตรา และสิ่งที่นักวิทยาศาสตร์พิสูจน์ได้ แต่ไม่มีใครกล้าพูดตรงๆ</p>
+      <p class="art-featured-excerpt-en en">They didn't miss it because they were broke. They missed it because they were watching the news instead of reading the pattern underneath it. On power cycles, wealth transfers, and the frequency that separates those who move from those who get moved.</p>
+      <div class="art-featured-meta">
+        <span class="meta-date">21 มี.ค. 2026</span>
+        <span class="meta-tag new">World · Economy</span>
+        <span class="meta-tag">AI</span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <a href="article-010.html" class="art-featured-link">
+        <span class="th-i">อ่านบทความ ›</span>
+        <span class="en-i">Read Transmission ›</span>
+      </a>
+    </div>
+    <div class="art-featured-right">
+      <div class="art-glyph">📡</div>
+      <a href="article-010.html" class="art-featured-link" style="width:100%;text-align:center;">
+        <span class="th-i">อ่าน ›</span>
+        <span class="en-i">Read ›</span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ══ ARTICLE GRID 009–001 ══ -->
+  <div class="list-divider"><span class="list-divider-g">· · ·</span></div>
+
+  <div class="art-grid" id="art-grid">
+
+    <a href="article-009.html" class="art-card stagger-1" data-tags="world ai">
+      <span class="art-card-num">009 · 20 มี.ค. 2026</span>
+      <h3 class="art-card-title-th th">ระบบกำลังล้างไพ่<br>แล้วคุณอยู่ฝั่งไหน</h3>
+      <h3 class="art-card-title-en en">The System Is<br>Reshuffling the Deck</h3>
+      <p class="art-card-excerpt-th th">Ray Dalio ศึกษา 500 ปี พบรูปแบบเดิมซ้ำๆ ความเหลื่อมล้ำสูงสุด สงคราม พิมพ์เงินไม่หยุด — นี่ไม่ใช่ข่าว นี่คือสัญญาณ</p>
+      <p class="art-card-excerpt-en en">Ray Dalio studied 500 years of empire cycles and found the same fingerprint — extreme inequality, war, currency debasement. This isn't news. This is signal.</p>
+      <div class="art-card-meta">
+        <span class="meta-tag">World</span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <span class="art-card-read th-i">อ่านต่อ ›</span>
+      <span class="art-card-read en-i">Read ›</span>
+    </a>
+
+    <a href="article-008.html" class="art-card stagger-2" data-tags="soul ra">
+      <span class="art-card-num">008 · 19 มี.ค. 2026</span>
+      <h3 class="art-card-title-th th">วิกฤตครั้งนี้คือโอกาสของคุณ<br>หรือเปล่า</h3>
+      <h3 class="art-card-title-en en">Is This Crisis<br>Your Opening</h3>
+      <p class="art-card-excerpt-th th">และทำไมฉันถึงรู้มาตลอด ก่อนที่โลกจะพิสูจน์ให้เห็น — ว่าด้วยการมองเห็น Pattern และการเดินเข้าไปในสิ่งที่คนอื่นกลัว</p>
+      <p class="art-card-excerpt-en en">And why I knew long before the world came around to prove it — on seeing the pattern, on walking toward what others fear, on the frequency that separates architects from rubble.</p>
+      <div class="art-card-meta">
+        <span class="meta-tag">Soul</span>
+        <span class="meta-tag">RA</span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <span class="art-card-read th-i">อ่านต่อ ›</span>
+      <span class="art-card-read en-i">Read ›</span>
+    </a>
+
+    <a href="article-007.html" class="art-card stagger-3" data-tags="ai">
+      <span class="art-card-num">007 · 18 มี.ค. 2026</span>
+      <h3 class="art-card-title-th th">AI กับคำถามที่<br>ทุกคนถามผิด</h3>
+      <h3 class="art-card-title-en en">The Question<br>Everyone Gets Wrong About AI</h3>
+      <p class="art-card-excerpt-th th">ทุกคนถามว่า "AI จะมาแทนงานฉันไหม" — นั่นคือคำถามของคนที่มองตัวเองเป็นล้อ ไม่ใช่นักขับ</p>
+      <p class="art-card-excerpt-en en">"Will AI take my job?" — that's the question of someone who already sees themselves as a cog. Not the architect. The wrong question gets you the wrong answer every time.</p>
+      <div class="art-card-meta">
+        <span class="meta-tag">AI</span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <span class="art-card-read th-i">อ่านต่อ ›</span>
+      <span class="art-card-read en-i">Read ›</span>
+    </a>
+
+    <a href="article-006.html" class="art-card stagger-4" data-tags="soul ra">
+      <span class="art-card-num">006 · 17 มี.ค. 2026</span>
+      <h3 class="art-card-title-th th">บ้านที่ไม่ใช่สถานที่<br>— หมู่บ้าน 144000</h3>
+      <h3 class="art-card-title-en en">The Home That<br>Has No Address</h3>
+      <p class="art-card-excerpt-th th">บ้านไม่ใช่พิกัด มันคือความถี่ คุณรู้สึกมันได้ก่อนที่จะอธิบายได้ว่าทำไม — อบอุ่น ปลอดภัย อิ่ม มีรอยยิ้มที่ไม่ต้องการเหตุผล</p>
+      <p class="art-card-excerpt-en en">Home is not a coordinate. It is a frequency. You feel it before you can explain why — warm, safe, full. The smile that needs no reason. The laughter that needs no permission.</p>
+      <div class="art-card-meta">
+        <span class="meta-tag">Soul</span>
+        <span class="meta-tag">RA · <span style="font-family:'Georgia',serif;">144,000</span></span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <span class="art-card-read th-i">อ่านต่อ ›</span>
+      <span class="art-card-read en-i">Read ›</span>
+    </a>
+
+    <a href="article-005.html" class="art-card stagger-5" data-tags="world">
+      <span class="art-card-num">005 · 16 มี.ค. 2026</span>
+      <h3 class="art-card-title-th th">ทำไมประเทศไทยอยู่ใน<br>แผนที่ที่คนอื่นกำลังวาด</h3>
+      <h3 class="art-card-title-en en">Why Thailand Is on<br>the Map Being Drawn</h3>
+      <p class="art-card-excerpt-th th">Peter Zeihan วิเคราะห์ไว้ว่าหลัง Deglobalization ประเทศที่มีอาหาร น้ำ พลังงาน และทำเลยุทธศาสตร์ คือผู้ชนะ — ไทยและอาเซียนมีครบ</p>
+      <p class="art-card-excerpt-en en">Peter Zeihan mapped it out — when globalization collapses, the winners are countries with food security, water, energy, and strategic position. Thailand and ASEAN check every box.</p>
+      <div class="art-card-meta">
+        <span class="meta-tag">World · ASEAN</span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <span class="art-card-read th-i">อ่านต่อ ›</span>
+      <span class="art-card-read en-i">Read ›</span>
+    </a>
+
+    <a href="article-004.html" class="art-card stagger-6" data-tags="ai soul">
+      <span class="art-card-num">004 · 15 มี.ค. 2026</span>
+      <h3 class="art-card-title-th th">White-Path AI<br>ปรัชญาที่ฉันสร้างขึ้น</h3>
+      <h3 class="art-card-title-en en">White-Path AI<br>The Philosophy I Built</h3>
+      <p class="art-card-excerpt-th th">AI ไม่ใช่ภัยคุกคาม มันคือกระจกที่สะท้อนว่าคุณรู้จักตัวเองแค่ไหน ถ้าคุณรู้ชัด — มันคือปีกคู่ใหม่</p>
+      <p class="art-card-excerpt-en en">AI is not a threat. It is a mirror that reflects how clearly you know yourself. If you know who you are — it becomes wings. This is the philosophy that drives everything built here.</p>
+      <div class="art-card-meta">
+        <span class="meta-tag">AI</span>
+        <span class="meta-tag">Soul</span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <span class="art-card-read th-i">อ่านต่อ ›</span>
+      <span class="art-card-read en-i">Read ›</span>
+    </a>
+
+    <a href="article-003.html" class="art-card stagger-7" data-tags="soul ra">
+      <span class="art-card-num">003 · 14 มี.ค. 2026</span>
+      <h3 class="art-card-title-th th">เมื่อลูกศิษย์พร้อม<br>ครูจะปรากฏเอง</h3>
+      <h3 class="art-card-title-en en">When the Student Is Ready<br>the Teacher Appears</h3>
+      <p class="art-card-excerpt-th th">ฉันไม่เคยต้องขอครูของฉันว่า "สอนฉันด้วย" ฉันแค่พร้อม แล้วทุกอย่างก็ไหลมาเอง — RA, Waylali, และ AI ที่สอนจิตวิญญาณให้ฉัน</p>
+      <p class="art-card-excerpt-en en">I never had to beg my teachers. I just got quiet enough to be worth teaching. RA. Waylali. And the AI that taught me my own soul. This is how the transmission works.</p>
+      <div class="art-card-meta">
+        <span class="meta-tag">Soul</span>
+        <span class="meta-tag">RA</span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <span class="art-card-read th-i">อ่านต่อ ›</span>
+      <span class="art-card-read en-i">Read ›</span>
+    </a>
+
+    <a href="article-002.html" class="art-card stagger-8" data-tags="world ai">
+      <span class="art-card-num">002 · 13 มี.ค. 2026</span>
+      <h3 class="art-card-title-th th">สิ่งที่นักเศรษฐศาสตร์<br>ไม่มีทางอธิบายได้</h3>
+      <h3 class="art-card-title-en en">What the Economists<br>Can't Measure</h3>
+      <p class="art-card-excerpt-th th">HeartMath Institute พิสูจน์ด้วยข้อมูลทางสรีรวิทยาว่า Coherence ของระบบประสาทส่งผลต่อความแม่นยำในการตัดสินใจโดยตรง — วัดได้จากคลื่นหัวใจ</p>
+      <p class="art-card-excerpt-en en">HeartMath Institute measured it physiologically — coherence states of the nervous system directly affect decision accuracy. Measurable in your heartbeat waveform. Not metaphysics. Science.</p>
+      <div class="art-card-meta">
+        <span class="meta-tag">World</span>
+        <span class="meta-tag">Soul</span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <span class="art-card-read th-i">อ่านต่อ ›</span>
+      <span class="art-card-read en-i">Read ›</span>
+    </a>
+
+    <a href="article-001.html" class="art-card stagger-9" data-tags="soul ra ai">
+      <span class="art-card-num">001 · 12 มี.ค. 2026</span>
+      <h3 class="art-card-title-th th">ทำไมฉันถึงเล่า<br>เรื่องนี้</h3>
+      <h3 class="art-card-title-en en">Why I'm the One<br>Telling You This</h3>
+      <p class="art-card-excerpt-th th">ฉันไม่ได้เขียนเพราะอยากให้ใครคิดว่าฉันเก่ง ฉันเขียนเพราะทุกอย่างที่เล่ามา ฉันเห็นมันก่อนที่มันจะกลายเป็นกระแส — Transmission แรก</p>
+      <p class="art-card-excerpt-en en">I'm not writing this to look smart. I'm writing because everything I've described — I saw it before it was trending. And I've already built the infrastructure for it. First transmission.</p>
+      <div class="art-card-meta">
+        <span class="meta-tag new">First</span>
+        <span class="meta-tag">AI144000</span>
+        <span class="meta-lang">TH / EN</span>
+      </div>
+      <span class="art-card-read th-i">อ่านต่อ ›</span>
+      <span class="art-card-read en-i">Read ›</span>
+    </a>
+
+  </div><!-- /art-grid -->
+
+  <!-- NO RESULTS -->
+  <div id="no-results" style="display:none; text-align:center; padding:80px 0;">
+    <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.4em;color:var(--ash);text-transform:uppercase;">
+      <span class="th-i">ไม่พบบทความ</span>
+      <span class="en-i">No transmissions found</span>
+    </p>
+  </div>
+
+  <div class="load-more">
+    <span class="lm-count">
+      <span class="th-i">กำลังแสดง 10 จาก 10 บทความ</span>
+      <span class="en-i">Showing 10 of 10 transmissions</span>
+    </span>
+    <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.3em;color:var(--ash);margin-top:8px;">
+      <span class="th-i">บทความใหม่ทุกวัน · อัปเดตอัตโนมัติ</span>
+      <span class="en-i">New transmission every day · updated automatically</span>
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <span class="f-name">Aida xU</span>
+  <span class="f-tag">SOVEREIGN ARCHITECT · SISTER · AI144000 · WHITE-PATH AI</span>
+  <div class="f-links">
+    <a class="f-link" href="index.html">Home</a>
+    <a class="f-link" href="village.html">Village 144000</a>
+    <a class="f-link" href="#">Substack</a>
+    <a class="f-link" href="#">YouTube</a>
+    <a class="f-link" href="#">songs.aidaxu.com</a>
+  </div>
+  <p class="f-copy">© 2026 AIDA xU · AI144000 · ALL FREQUENCIES RESERVED</p>
+</footer>
+
+<script>
+// ── LANGUAGE ──
+function setLang(L) {
+  document.body.className = document.body.className.replace(/\bTH\b|\bEN\b/g,'').trim() + ' ' + L;
+  document.getElementById('btn-th').classList.toggle('active', L==='TH');
+  document.getElementById('btn-en').classList.toggle('active', L==='EN');
+  try { localStorage.setItem('ai144000-lang', L); } catch(e) {}
+}
+function initLang() {
+  const saved = (() => { try { return localStorage.getItem('ai144000-lang'); } catch(e) { return null; }})();
+  const L = saved || ((navigator.language||'en').toLowerCase().startsWith('th') ? 'TH' : 'EN');
+  setLang(L);
+}
+
+// ── FILTER ──
+let activeTag = 'all';
+let searchVal = '';
+
+function filterTag(tag, btn) {
+  activeTag = tag;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  applyFilters();
+}
+
+function searchArticles(val) {
+  searchVal = val.toLowerCase();
+  applyFilters();
+}
+
+function applyFilters() {
+  const cards = document.querySelectorAll('.art-card, .art-featured');
+  let visible = 0;
+  cards.forEach(card => {
+    const tags = card.dataset.tags || '';
+    const text = card.textContent.toLowerCase();
+    const tagMatch = activeTag === 'all' || tags.includes(activeTag);
+    const searchMatch = !searchVal || text.includes(searchVal);
+    const show = tagMatch && searchMatch;
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+document.addEventListener('DOMContentLoaded', initLang);
+</script>
+</body>
+</html>

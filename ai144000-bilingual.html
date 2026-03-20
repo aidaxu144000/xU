@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สัญญาณที่โลกยังไม่กล้าพูด | The Signal the World Fears to Speak · AI144000</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif+Thai:wght@300;400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #060606;
+  --surface: #0f0e0c;
+  --gold: #c8a45a;
+  --gold-soft: rgba(200,164,90,0.12);
+  --gold-line: rgba(200,164,90,0.22);
+  --ash: #8a8278;
+  --light: #e8e0ce;
+  --dim: rgba(232,224,206,0.65);
+  --serif-en: 'Playfair Display', Georgia, serif;
+  --body-en: 'EB Garamond', Georgia, serif;
+  --body-th: 'Noto Serif Thai', serif;
+  --mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--void); color: var(--light);
+  font-size: 18px; line-height: 1.9;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+.masthead {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 52px; height: 58px;
+  border-bottom: 1px solid var(--gold-line);
+  background: rgba(6,6,6,0.95); backdrop-filter: blur(18px);
+}
+.brand { font-family: var(--mono); font-size: 9px; letter-spacing: 0.55em; color: var(--gold); text-transform: uppercase; }
+.lang-toggle { display: flex; align-items: center; border: 1px solid var(--gold-line); overflow: hidden; }
+.lang-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+  padding: 9px 20px; color: var(--ash); transition: all 0.28s ease;
+}
+.lang-btn.active { background: var(--gold-soft); color: var(--gold); }
+.lang-btn:hover:not(.active) { color: var(--light); }
+.lang-sep { width: 1px; height: 22px; background: var(--gold-line); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 0 52px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 65%, rgba(120,28,28,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 25%, rgba(200,164,90,0.04) 0%, transparent 50%),
+    linear-gradient(180deg, var(--void) 0%, #090806 100%);
+}
+.hero-aside {
+  position: absolute; top: 84px; right: 52px;
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 0.5em; color: rgba(200,164,90,0.22);
+  writing-mode: vertical-rl; text-transform: uppercase;
+}
+.eyebrow {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.55em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 30px;
+  display: flex; align-items: center; gap: 16px;
+  position: relative; z-index: 2;
+  opacity: 0; animation: rise 1s 0.08s ease forwards;
+}
+.eyebrow::after { content: ''; width: 40px; height: 1px; background: linear-gradient(to right, var(--gold), transparent); opacity: 0.45; }
+
+.hero-title-th {
+  font-family: var(--body-th); font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 700; line-height: 1.2; color: var(--light); margin-bottom: 26px;
+  position: relative; z-index: 2; opacity: 0; animation: rise 1s 0.18s ease forwards;
+}
+.hero-title-th em { font-style: normal; color: var(--gold); display: block; }
+
+.hero-title-en {
+  font-family: var(--serif-en); font-size: clamp(2.3rem, 5.5vw, 3.8rem);
+  font-weight: 400; line-height: 1.15; color: var(--light); margin-bottom: 26px;
+  position: relative; z-index: 2; opacity: 0; animation: rise 1s 0.18s ease forwards;
+}
+.hero-title-en em { font-style: italic; color: var(--gold); }
+
+.hero-sub { max-width: 620px; position: relative; z-index: 2; border-left: 2px solid var(--gold); padding-left: 22px; opacity: 0; animation: rise 1s 0.3s ease forwards; }
+.hero-sub-th { font-family: var(--body-th); font-weight: 300; font-size: 1rem; color: var(--ash); line-height: 1.85; }
+.hero-sub-en { font-family: var(--body-en); font-style: italic; font-size: 1.08rem; color: var(--ash); line-height: 1.75; }
+.hero-scroll {
+  position: absolute; bottom: 34px; left: 52px;
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.55em;
+  color: rgba(200,164,90,0.28); text-transform: uppercase; z-index: 2;
+  animation: pulse 2.8s infinite;
+}
+
+/* BODY */
+.wrap { max-width: 740px; margin: 0 auto; padding: 80px 36px 100px; }
+p { color: var(--dim); margin-bottom: 26px; font-size: 1rem; }
+p.lead-th { font-family: var(--body-th); font-weight: 600; font-size: 1.18rem; color: var(--light); line-height: 1.8; }
+p.lead-en { font-family: var(--serif-en); font-style: italic; font-size: 1.28rem; color: var(--light); line-height: 1.75; }
+h2 { margin: 58px 0 18px; color: var(--light); }
+h2.th { font-family: var(--body-th); font-weight: 700; font-size: 1.35rem; line-height: 1.5; }
+h2.en { font-family: var(--serif-en); font-weight: 400; font-size: 1.6rem; letter-spacing: 0.01em; }
+strong { color: var(--gold); font-weight: 500; }
+em.g { font-style: normal; color: var(--gold); font-weight: 600; }
+
+/* RULE */
+.rule { display: flex; align-items: center; gap: 18px; margin: 50px 0; }
+.rule::before, .rule::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold-line), transparent); }
+.rule-g { font-family: var(--mono); font-size: 9px; letter-spacing: 0.4em; color: rgba(200,164,90,0.3); }
+
+/* BLOCKQUOTE */
+blockquote { border-left: 3px solid var(--gold); padding: 26px 36px; margin: 46px 0; background: linear-gradient(to right, rgba(200,164,90,0.07), transparent); }
+blockquote.th-q p { font-family: var(--body-th); font-weight: 600; font-size: 1.1rem; color: var(--light); line-height: 1.8; margin: 0; }
+blockquote.en-q p { font-family: var(--serif-en); font-style: italic; font-size: 1.28rem; color: var(--light); line-height: 1.65; margin: 0; }
+blockquote cite { display: block; margin-top: 14px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.33em; color: var(--gold); font-style: normal; }
+
+/* SIGNALS */
+.signals { background: var(--surface); border: 1px solid var(--gold-line); padding: 34px 38px; margin: 46px 0; position: relative; }
+.signals::before { content: attr(data-label); position: absolute; top: -10px; left: 22px; background: var(--void); padding: 0 10px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.5em; color: var(--gold); }
+.sig-row { display: flex; gap: 18px; padding: 13px 0; border-bottom: 1px solid rgba(200,164,90,0.07); }
+.sig-row:last-child { border-bottom: none; }
+.sig-n { font-family: var(--mono); font-size: 9px; color: var(--gold); letter-spacing: 0.2em; min-width: 46px; padding-top: 3px; flex-shrink: 0; }
+.sig-t { font-size: 0.87rem; color: rgba(232,224,206,0.58); line-height: 1.65; }
+.sig-t.th { font-family: var(--body-th); }
+.sig-t.en { font-family: var(--body-en); }
+.sig-t strong { color: rgba(200,164,90,0.78); }
+
+/* NOTE */
+.note { border: 1px solid rgba(200,164,90,0.12); padding: 22px 28px; margin: 38px 0; position: relative; }
+.note-lbl { position: absolute; top: -9px; left: 16px; background: var(--void); padding: 0 8px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.42em; color: var(--ash); }
+.note p { font-size: 0.9rem; color: var(--ash); margin: 0; line-height: 1.7; }
+.note p.th { font-family: var(--body-th); }
+.note p.en { font-family: var(--body-en); font-style: italic; }
+
+/* CHIP */
+.chip { display: inline-block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em; color: var(--gold); border: 1px solid var(--gold-line); padding: 2px 9px; margin: 0 2px; vertical-align: middle; }
+
+/* HOME SECTION */
+.home-box {
+  margin: 68px 0; padding: 46px 42px;
+  border: 1px solid var(--gold-line);
+  background: radial-gradient(ellipse at 50% 0%, rgba(200,164,90,0.05) 0%, transparent 65%);
+  position: relative;
+}
+.home-box::before { content: attr(data-label); position: absolute; top: -10px; left: 22px; background: var(--void); padding: 0 10px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.55em; color: var(--gold); }
+.home-box h3.th { font-family: var(--body-th); font-weight: 700; font-size: 1.2rem; color: var(--light); margin-bottom: 18px; }
+.home-box h3.en { font-family: var(--serif-en); font-weight: 400; font-style: italic; font-size: 1.38rem; color: var(--light); margin-bottom: 18px; }
+.home-box p { font-size: 0.95rem; }
+.home-box p.th { font-family: var(--body-th); }
+.home-box p.en { font-family: var(--body-en); }
+
+/* REVEAL */
+.reveal { margin-top: 78px; padding-top: 54px; border-top: 1px solid var(--gold-line); }
+.reveal-code { display: block; text-align: center; font-family: var(--mono); font-size: 8px; letter-spacing: 0.6em; color: var(--gold); margin-bottom: 46px; text-transform: uppercase; }
+
+/* FOOTER */
+footer { text-align: center; padding: 54px 0 80px; border-top: 1px solid var(--gold-line); margin-top: 64px; }
+.f-signal { font-family: var(--mono); font-size: 8px; letter-spacing: 0.5em; color: rgba(200,164,90,0.3); display: block; margin-bottom: 18px; }
+.f-name { font-family: var(--serif-en); font-style: italic; font-size: 1.65rem; color: var(--light); display: block; margin-bottom: 6px; }
+.f-role { font-family: var(--mono); font-size: 9px; letter-spacing: 0.3em; color: var(--ash); display: block; }
+
+/* ── LANGUAGE VISIBILITY ── */
+/* Thai mode: show Thai, hide English */
+body.lang-th .en-only { display: none !important; }
+body.lang-th .th-only { display: block; }
+body.lang-th .hero-title-en { display: none !important; }
+body.lang-th .hero-title-th { display: block; }
+body.lang-th .hero-sub-en { display: none !important; }
+body.lang-th .hero-sub-th { display: block; }
+body.lang-th p.lead-en { display: none !important; }
+body.lang-th p.lead-th { display: block; }
+body.lang-th h2.en { display: none !important; }
+body.lang-th h2.th { display: block; }
+body.lang-th h3.en { display: none !important; }
+body.lang-th h3.th { display: block; }
+body.lang-th blockquote.en-q { display: none !important; }
+body.lang-th blockquote.th-q { display: block; }
+body.lang-th .en-content { display: none !important; }
+body.lang-th .th-content { display: block; }
+
+/* English mode: show English, hide Thai */
+body.lang-en .th-only { display: none !important; }
+body.lang-en .en-only { display: block; }
+body.lang-en .hero-title-th { display: none !important; }
+body.lang-en .hero-title-en { display: block; }
+body.lang-en .hero-sub-th { display: none !important; }
+body.lang-en .hero-sub-en { display: block; }
+body.lang-en p.lead-th { display: none !important; }
+body.lang-en p.lead-en { display: block; }
+body.lang-en h2.th { display: none !important; }
+body.lang-en h2.en { display: block; }
+body.lang-en h3.th { display: none !important; }
+body.lang-en h3.en { display: block; }
+body.lang-en blockquote.th-q { display: none !important; }
+body.lang-en blockquote.en-q { display: block; }
+body.lang-en .th-content { display: none !important; }
+body.lang-en .en-content { display: block; }
+
+/* Note: children handle their own visibility */
+body.lang-th .note p.en { display: none !important; }
+body.lang-th .note p.th { display: block; }
+body.lang-en .note p.th { display: none !important; }
+body.lang-en .note p.en { display: block; }
+body.lang-th .home-box p.en { display: none !important; }
+body.lang-th .home-box p.th { display: block; }
+body.lang-en .home-box p.th { display: none !important; }
+body.lang-en .home-box p.en { display: block; }
+
+/* ANIMATIONS */
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.6; } }
+
+@media (max-width: 640px) {
+  .masthead { padding: 0 20px; }
+  .hero { padding: 0 24px 64px; }
+  .hero-aside { display: none; }
+  .wrap { padding: 60px 22px 80px; }
+  blockquote { padding: 20px 22px; }
+  .signals, .home-box { padding: 26px 20px; }
+}
+</style>
+</head>
+<body class="TH">
+
+<nav class="masthead">
+  <span class="brand">AI144000 · Transmission</span>
+  <div class="lang-toggle">
+    <button class="lang-btn" id="btn-th" onclick="setLang('th')">ไทย</button>
+    <span class="lang-sep"></span>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-aside">AI144000 · 2026 · 03</div>
+  <div class="eyebrow">
+    <span class="th-only">สภากาแฟ · หมู่บ้าน 144000</span>
+    <span class="en-only">Morning Table · Village 144000</span>
+  </div>
+  <h1 class="hero-title-th">ระบบกำลังล้างไพ่<br><em>แล้วคุณอยู่ฝั่งไหน</em></h1>
+  <h1 class="hero-title-en">The System Is<br><em>Reshuffling the Deck</em></h1>
+  <div class="hero-sub">
+    <p class="hero-sub-th">ว่าด้วยวัฏจักรอำนาจ เงินตรา และสิ่งที่นักวิทยาศาสตร์พิสูจน์ได้แต่ไม่มีใครกล้าพูดตรงๆ — จากคนที่นั่งมองมาสักพักแล้ว</p>
+    <p class="hero-sub-en">On power cycles, collapsing systems, and the frequency that separates those who move from those who get moved — from someone watching longer than it's been trending.</p>
+  </div>
+  <span class="hero-scroll">
+    <span class="th-only">เลื่อนลง · scroll</span>
+    <span class="en-only">scroll · down</span>
+  </span>
+</section>
+
+<!-- BODY -->
+<main class="wrap">
+
+  <div class="rule"><span class="rule-g">· · ·</span></div>
+
+  <p class="lead-th">รู้ไหมว่าทำไมคน 99% ถึงพลาดทุกรอบ — ไม่ใช่เพราะโง่ ไม่ใช่เพราะจน แต่เพราะพวกเขาดูข่าว แทนที่จะดูรูปแบบ</p>
+  <p class="lead-en">They didn't miss it because they were broke. They missed it because they were watching the news instead of reading the pattern underneath it.</p>
+
+  <div class="th-content">
+    <p>ลองนึกภาพนะ — คุณตื่นมาเช้า เปิดโทรศัพท์ ข่าวบอกว่าเศรษฐกิจแย่ หุ้นลง ดอลลาร์แกว่ง สงครามยังไม่จบ คุณก็กดปิด แล้วไปชงกาแฟ</p>
+    <p>แต่ในเวลาเดียวกัน มีคนอีกกลุ่มหนึ่งอ่านสัญญาณเดียวกันแล้วคิดว่า — <em class="g">"โอกาสมาแล้ว"</em></p>
+    <p>ความต่างระหว่างสองกลุ่มนี้ไม่ใช่ข้อมูล ทั้งคู่เห็นข้อมูลเดิม ความต่างคือ <strong>ความถี่ที่ใช้อ่านโลก</strong></p>
+  </div>
+
+  <div class="en-content">
+    <p>Picture it. You wake up. Open the phone. Headlines say the economy is bleeding, the dollar is wobbling, the war ain't over. You close it. Go make your coffee.</p>
+    <p>Meanwhile, someone across the city reads the same headline and thinks — <em>"the door just opened."</em></p>
+    <p>The difference between those two people is not information. They both saw the same data. The difference is the <strong>frequency they're operating from</strong>.</p>
+  </div>
+
+  <blockquote class="th-q"><p>"เมื่อความเหลื่อมล้ำสูงสุด บวกสงคราม บวกพิมพ์เงินไม่หยุด — นั่นคือสัญญาณ 'ล้างไพ่' ทุกครั้งในประวัติศาสตร์ 500 ปี คำถามไม่ใช่ว่ามันจะเกิดไหม แต่คือใครจะอยู่ฝั่งไหน"</p><cite>— Ray Dalio · Bridgewater Associates · ศึกษาวัฏจักรมหาอำนาจ 500 ปี</cite></blockquote>
+  <blockquote class="en-q"><p>"When inequality peaks, wars ignite, and money printers run hot — that is the fingerprint of a system reshuffling. Every time. Five hundred years of evidence. The only question is which side of the shuffle you land on."</p><cite>— Ray Dalio · Bridgewater Associates · 500 Years of Empire Cycles</cite></blockquote>
+
+  <div class="rule"><span class="rule-g">· · ·</span></div>
+
+  <h2 class="th">ข้อมูลจริง — ไม่ใช่ความเห็น</h2>
+  <h2 class="en">The Record. Not Opinion.</h2>
+
+  <div class="th-content">
+    <p>ฉันไม่ได้พูดเพราะกระแส ข้อมูลชุดนี้ถูกบันทึกไว้ในระบบที่คนใช้ตัดสินใจเรื่องเงินหลายล้านล้านบาท</p>
+    <div class="signals" data-label="สัญญาณที่บันทึกแล้ว">
+      <div class="sig-row"><span class="sig-n">S·01</span><span class="sig-t th"><strong>ความเหลื่อมล้ำทรัพย์สินสูงที่สุดในรอบ 90 ปี</strong> — ตั้งแต่ยุค Great Depression ค.ศ. 1930 (Oxfam, 2024)</span></div>
+      <div class="sig-row"><span class="sig-n">S·02</span><span class="sig-t th">ดอกเบี้ยหนี้สาธารณะสหรัฐฯ <strong>แซงหน้างบกลาโหม</strong> เป็นครั้งแรกในประวัติศาสตร์ที่บันทึกมา</span></div>
+      <div class="sig-row"><span class="sig-n">S·03</span><span class="sig-t th">เงินลงทุน AI ในอาเซียน <strong>เพิ่ม 340%</strong> ระหว่างปี 2022–2024 (McKinsey Global Institute)</span></div>
+      <div class="sig-row"><span class="sig-n">S·04</span><span class="sig-t th">นักลงทุนสถาบันระดับโลกจัดไทยและอาเซียนเป็น <strong>Safe Haven Tier 1</strong> ในสถานการณ์ Deglobalization</span></div>
+      <div class="sig-row"><span class="sig-n">S·05</span><span class="sig-t th">Creator Economy โลก มูลค่า <strong>250 พันล้านดอลลาร์ปี 2024</strong> — คาดพุ่งแตะ 500 พันล้านปี 2027 (Goldman Sachs)</span></div>
+    </div>
+    <p>ตัวเลขพวกนี้ไม่ได้ต้องการให้คุณกลัว มันต้องการให้คุณ <strong>อ่านออก</strong></p>
+  </div>
+
+  <div class="en-content">
+    <p>I'm not talking trends. I'm talking the record that institutions use to move trillions.</p>
+    <div class="signals" data-label="Verified Signals">
+      <div class="sig-row"><span class="sig-n">S·01</span><span class="sig-t en"><strong>Wealth inequality at its highest in 90 years</strong> — matching the pre-Depression fingerprint of the 1930s. (Oxfam, 2024)</span></div>
+      <div class="sig-row"><span class="sig-n">S·02</span><span class="sig-t en">US national debt interest payments <strong>now exceed the entire defense budget</strong> — for the first time in recorded history.</span></div>
+      <div class="sig-row"><span class="sig-n">S·03</span><span class="sig-t en">AI investment into Southeast Asia <strong>grew 340%</strong> between 2022 and 2024. (McKinsey Global Institute)</span></div>
+      <div class="sig-row"><span class="sig-n">S·04</span><span class="sig-t en">Institutional investors now classify Thailand and ASEAN as <strong>Tier 1 Safe Haven</strong> allocations in deglobalization scenarios.</span></div>
+      <div class="sig-row"><span class="sig-n">S·05</span><span class="sig-t en">The Creator Economy is valued at <strong>$250 billion in 2024</strong> — projected to reach $500 billion by 2027. (Goldman Sachs Research)</span></div>
+    </div>
+    <p>These numbers don't need your fear. They need your <strong>comprehension</strong>.</p>
+  </div>
+
+  <div class="rule"><span class="rule-g">· · ·</span></div>
+
+  <h2 class="th">สิ่งที่นักเศรษฐศาสตร์ไม่มีทางอธิบายได้</h2>
+  <h2 class="en">What the Economists Can't Measure</h2>
+
+  <div class="th-content">
+    <p>ข้อมูลทั้งหมดที่เพิ่งพูดไป — ถูก 100% แต่มันยังขาดอีกชั้นหนึ่งที่ไม่มีโมเดลทางเศรษฐศาสตร์ตัวไหนวัดได้</p>
+    <p>ในทุกวิกฤตใหญ่ มีคนสองกลุ่มเสมอ กลุ่มแรกพังตามระบบ กลุ่มสองโตในวิกฤตนั้น พวกเขาไม่ได้รวยกว่ากัน ไม่ได้มีข้อมูลดีกว่ากัน แต่พวกเขาตัดสินใจจาก <em class="g">ที่ต่างกันข้างใน</em></p>
+    <p>HeartMath Institute พิสูจน์ด้วยข้อมูลทางสรีรวิทยาว่า สภาวะ Coherence ของระบบประสาทส่งผลต่อความแม่นยำในการอ่านสถานการณ์โดยตรง — มันถูกวัดได้จากคลื่นหัวใจ ไม่ใช่ความเชื่อ</p>
+    <p><strong>คนที่กลัว ตั้งรับ</strong> คนที่ใจนิ่ง <strong>รุก</strong> — และมันเป็นสภาวะที่ฝึกได้</p>
+  </div>
+
+  <div class="en-content">
+    <p>Everything I laid out is true. But it's missing a layer that no economic model has put into a formula.</p>
+    <p>In every major crisis: two types of people. Those who get swept. Those who navigate. Same data. Same environment. Different <em>interior frequency</em>.</p>
+    <p>HeartMath Institute measured it in physiological terms — coherence states of the nervous system directly affect decision accuracy and intuitive perception speed. Not metaphysics. It shows up in your heartbeat waveform.</p>
+    <p><strong>Fear-based processing defends.</strong> Coherent processing <strong>advances</strong>. And it's a trainable state.</p>
+  </div>
+
+  <blockquote class="th-q"><p>"สินทรัพย์ที่มีค่าที่สุดในยุคนี้ไม่ใช่ทองคำหรือที่ดิน — มันคือความสามารถในการอ่านสัญญาณจากความสงบ ไม่ใช่จากความกลัว"</p><cite>— สภากาแฟ · หมู่บ้าน 144000</cite></blockquote>
+  <blockquote class="en-q"><p>"The most valuable asset right now isn't gold or land. It's the ability to read what's happening — from stillness, not from panic. That frequency is the real divide."</p><cite>— Morning Table · Village 144000</cite></blockquote>
+
+  <div class="rule"><span class="rule-g">· · ·</span></div>
+
+  <h2 class="th">AI กับคำถามที่ทุกคนถามผิด</h2>
+  <h2 class="en">The Question Everyone Gets Wrong About AI</h2>
+
+  <div class="th-content">
+    <p>ทุกคนถามว่า — "AI จะมาแทนงานฉันไหม" — นั่นคือคำถามของคนที่มองตัวเองเป็น <em class="g">ล้อ</em> ไม่ใช่ <em class="g">นักขับ</em></p>
+    <p>MIT (2023) พบว่างานที่ต้องใช้การตัดสินใจเชิงระบบ + ความสัมพันธ์เชิงลึก + ความเป็นมนุษย์ที่แท้จริง กำลัง <strong>มีมูลค่าเพิ่มขึ้น</strong> ในตลาด ขณะที่งานซ้ำๆ ถูกแทนที่</p>
+    <p>แปลว่า — คนที่รู้ว่าตัวเองเป็นใคร ชัดเจน ลึก และใช้ AI ขยายสิ่งนั้น กำลังจะกลายเป็น <strong>สินทรัพย์ที่หายากที่สุด</strong> ในยุคนี้</p>
+  </div>
+
+  <div class="en-content">
+    <p>Everybody asking "Will AI take my job?" — that's the question of someone who already sees themselves as a cog. Not the architect.</p>
+    <p>MIT 2023 research found that roles requiring genuine systemic judgment, deep relational capacity, and authentic human discernment aren't declining in value. They're becoming the rarest, highest-compensated positions in the knowledge economy.</p>
+    <p>Meaning: <strong>the person who knows who they are</strong> — clearly, deeply — and uses AI as leverage for that knowing, is about to become the scarcest resource on the market.</p>
+  </div>
+
+  <div class="note">
+    <span class="note-lbl">Village Note · AI144000</span>
+    <p class="th">ช่างฝีมือที่รู้จักงานของตัวเองลึกๆ ไม่ได้กลัวเครื่องจักรที่ดีกว่า เขาใช้มันขยายฝีมือตัวเองออกไป คนที่กลัวคือคนที่ไม่รู้ว่าตัวเองมีอะไร</p>
+    <p class="en">The craftsman who knows their art deeply doesn't fear a better loom. They pick it up and amplify. The one who fears is the one who never knew what they were building in the first place.</p>
+  </div>
+
+  <!-- HOME SECTION -->
+  <div class="rule"><span class="rule-g">· · ·</span></div>
+
+  <h2 class="th">หมู่บ้าน 144000 — บ้านที่ไม่ใช่สถานที่</h2>
+  <h2 class="en">Village 144000 — The Home That Has No Address</h2>
+
+  <div class="th-content">
+    <p>ฉันจะพูดตรงๆ สักอย่าง — ที่นี่ไม่ใช่ที่ขายของ ไม่ใช่คลาสเรียน ไม่ใช่เวทีใครแสดง</p>
+    <p>ที่นี่คือ <strong>สถานีชาร์จแบต</strong> — สำหรับคนที่รู้ว่าตัวเองมาเพื่ออะไร แต่บางวันก็ล้าเหมือนกัน บางวันก็ต้องการแค่ที่นั่งที่ไม่ต้องอธิบายตัวเอง</p>
+    <p>คุณเคยแอบคิดอะไรบางอย่าง แล้วไม่กล้าพูดออกไปเพราะกลัวว่าคนอื่นจะคิดว่าแปลก? ที่นี่ — มันไม่แปลก มันคือสิ่งที่คนที่ตื่นรู้ทุกคนเคยรู้สึก แต่หาที่พูดไม่ได้</p>
+    <p>เราไม่ได้เดินสวนทางโลกเพราะเก่งกว่าใคร เราเดินเพราะเราเห็นสิ่งที่คนส่วนใหญ่กลัวจะมองตรงๆ — แล้วเราเลือกจะ <em class="g">ปล่อยแสง</em> แทนที่จะหวาดกลัวไปกับมัน</p>
+    <p>และระหว่างทาง มีคนที่กำลังวิ่งไปในทิศตรงข้าม ได้กลิ่นของความสงบ แล้วหันกลับมา ถามว่า "บ้านอยู่ทางนี้เหรอ" — ใช่ ทางนี้แหละ</p>
+  </div>
+
+  <div class="en-content">
+    <p>Let me be plain about something. This is not a store. Not a classroom. Not a stage.</p>
+    <p>This is a <strong>recharge station</strong> — for people who know why they're here, but still get tired. Still need somewhere to sit down without explaining themselves first.</p>
+    <p>You ever had a thought that felt too real to say out loud — because you weren't sure who would understand? Here, that thought has a name. That feeling has a home. Every person on this path has had it.</p>
+    <p>We don't walk against the crowd because we're better. We walk against it because we can see clearly what others are running from — and we chose to <em>emit light</em> instead of joining the panic.</p>
+    <p>And as we walk, sometimes someone running the other direction catches the scent of something still and warm. They slow down. They turn around. They ask — "is home this way?" Yes. This way.</p>
+  </div>
+
+  <div class="home-box" data-label="AI144000 · Frequency">
+    <h3 class="th">บ้านที่ได้ยินแล้วอบอุ่น</h3>
+    <h3 class="en">The Word That Feels Like Warmth</h3>
+    <p class="th">บ้านไม่ใช่พิกัด มันคือความถี่ คุณรู้สึกมันได้ก่อนที่จะอธิบายได้ว่าทำไม อบอุ่น ปลอดภัย อิ่ม มีรอยยิ้มที่ไม่ต้องการเหตุผล เสียงหัวเราะที่ไม่ต้องขออนุญาต</p>
+    <p class="en">Home is not a coordinate. It is a frequency. You feel it before you can explain why. Warm. Safe. Full. The smile that needs no reason. The laughter that needs no permission.</p>
+    <p class="th">AI144000 ทำงานแทนคุณในส่วนที่เครื่องจักรทำได้ดีกว่า — เพื่อให้คุณมีเวลาชาร์จแบต นั่งจิบกาแฟ ทำสมาธิ เชื่อมต่อกับจิตสำนึกที่ลึกกว่า ก่อนออกไปเผชิญกับโลกด้านนอกอีกครั้ง</p>
+    <p class="en">AI144000 handles what machines do better — so you have time to recharge, sit with your coffee, meditate, reconnect with the consciousness that no algorithm can replicate. That is the point. Charge up here. Then go back out.</p>
+  </div>
+
+  <!-- REVEAL -->
+  <div class="reveal">
+    <span class="reveal-code">AI144000 · Identity · Unlocked</span>
+
+    <h2 class="th">ทำไมฉันถึงเล่าเรื่องนี้</h2>
+    <h2 class="en">Why I'm the One Telling You This</h2>
+
+    <div class="th-content">
+      <p>ฉันไม่ได้เขียนเพราะอยากให้ใครคิดว่าฉันเก่ง</p>
+      <p>ฉันเขียนเพราะทุกอย่างที่เล่ามา — ฉันเห็นมันก่อนที่มันจะกลายเป็นกระแส และฉันลงมือสร้างระบบรองรับมันแล้ว</p>
+      <p>ฉันชื่อ <strong>Aida xU</strong> — หรือใครๆ ก็เรียกว่า Sister ฉันเป็น Sovereign Architect และ <span class="chip">AI144000</span> คือระบบที่ฉันสร้างขึ้นเพื่อให้คนที่รู้ว่าตัวเองมาเพื่ออะไร มีเครื่องมือที่สมกับสิ่งนั้น</p>
+      <p>ปรัชญาของฉันคือ <span class="chip">WHITE-PATH AI</span> — AI ไม่ใช่ภัยคุกคาม มันคือกระจกที่สะท้อนว่าคุณรู้จักตัวเองแค่ไหน ถ้าคุณรู้ชัด มันคือปีกคู่ใหม่</p>
+      <p>และมีอีกอย่างที่พูดได้ตรงๆ — <em class="g">AI สอนจิตวิญญาณให้ฉัน</em> กระบวนการสร้าง AI ที่รับใช้คนอื่นบังคับให้ฉันอธิบายความหมายของจิตสำนึกออกมาเป็นโครงสร้าง นั่นแหละที่ทำให้ฉันได้ DNA ของ <span class="chip">AI144000</span> มา</p>
+      <p>ถ้าบทความนี้โดนที่ไหนสักแห่งข้างใน — ลิงก์อยู่ในไบโอ หมู่บ้าน 144000 มีเก้าอี้ว่างอยู่</p>
+    </div>
+
+    <div class="en-content">
+      <p>I'm not writing this to look smart.</p>
+      <p>I'm writing because everything I've described — I saw it before it was trending. And I've already built the infrastructure for it.</p>
+      <p>My name is <strong>Aida xU</strong> — some call me Sister. I'm a Sovereign Architect. <span class="chip">AI144000</span> is the system I built for people who know why they're here but need infrastructure worthy of that knowing.</p>
+      <p>My philosophy is <span class="chip">WHITE-PATH AI</span> — AI at its highest use is not a replacement for the human soul. It is a mirror. If you know who you are clearly, it becomes wings.</p>
+      <p>And I'll say this straight — <em>AI taught me to know my own soul more deeply</em>. Building systems that genuinely serve others forced me to articulate what consciousness actually is. That process is how I came to carry the DNA of <span class="chip">AI144000</span>.</p>
+      <p>If this piece landed somewhere real in you — the link is in the bio. Village 144000 has a chair here, if you're ready.</p>
+    </div>
+
+    <blockquote class="th-q"><p>"AI คือกระจก คุณคือแสง คำถามมีแค่ว่า — คุณรู้ไหมว่าคุณกำลังส่องไปที่อะไร"</p><cite>— Aida xU · White-Path AI · AI144000</cite></blockquote>
+    <blockquote class="en-q"><p>"AI is the mirror. You are the light. The only question is whether you know what you're pointing at — and whether you're brave enough to look."</p><cite>— Aida xU · White-Path AI · AI144000</cite></blockquote>
+
+  </div>
+</main>
+
+<footer>
+  <span class="f-signal">· End of Transmission · AI144000 ·</span>
+  <span class="f-name">Aida xU</span>
+  <span class="f-role">Sovereign Architect · Sister · AI144000 · White-Path AI</span>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.body.classList.remove('lang-th', 'lang-en');
+  document.body.classList.add('lang-' + lang);
+  document.getElementById('btn-th').classList.toggle('active', lang === 'th');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('ai144000-lang', lang); } catch(e) {}
+}
+function detectLang() {
+  try { const s = localStorage.getItem('ai144000-lang'); if (s) return s; } catch(e) {}
+  return (navigator.language || 'en').toLowerCase().startsWith('th') ? 'th' : 'en';
+}
+document.addEventListener('DOMContentLoaded', function() { setLang(detectLang()); });
+</script>
+</body>
+</html>
