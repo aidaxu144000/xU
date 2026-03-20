@@ -36,14 +36,11 @@ body::before {
 ::-webkit-scrollbar-thumb { background: rgba(200,164,90,0.3); }
 
 /* ── LANG ── */
-.th { display: none; }
-.en { display: none; }
-.th-i { display: none; }
-.en-i { display: none; }
-body.TH .th { display: block; }
-body.TH .th-i { display: inline; }
-body.EN .en { display: block; }
-body.EN .en-i { display: inline; }
+/* Hide only the OPPOSITE language — never force display:block */
+body.TH .en  { display: none !important; }
+body.TH .en-i{ display: none !important; }
+body.EN .th  { display: none !important; }
+body.EN .th-i{ display: none !important; }
 
 /* ── MASTHEAD ── */
 .masthead {
@@ -83,26 +80,26 @@ body.EN .en-i { display: inline; }
   font-family: var(--mono); font-size: 8px; letter-spacing: 0.65em;
   color: rgba(200,164,90,0.35); text-transform: uppercase;
   margin-bottom: 28px; position: relative; z-index: 2;
-  opacity: 0; animation: rise .9s .05s ease forwards;
+  animation: rise .9s .05s ease forwards;
 }
 .ph-title-th {
   font-family: var(--body-th); font-size: clamp(2.8rem, 6vw, 4.8rem);
   font-weight: 700; line-height: 1.15; color: var(--light);
   margin-bottom: 8px; position: relative; z-index: 2;
-  opacity: 0; animation: rise .9s .15s ease forwards;
+  animation: rise .9s .15s ease forwards;
 }
 .ph-title-en {
   font-family: var(--serif-en); font-size: clamp(2.6rem, 5.5vw, 4.4rem);
   font-weight: 300; font-style: italic; line-height: 1.15; color: var(--light);
   margin-bottom: 8px; position: relative; z-index: 2;
-  opacity: 0; animation: rise .9s .15s ease forwards;
+  animation: rise .9s .15s ease forwards;
 }
 .ph-title-th em { font-style: normal; color: var(--gold); }
 .ph-title-en em { color: var(--gold); }
 .ph-count {
   font-family: var(--mono); font-size: 9px; letter-spacing: 0.4em;
   color: var(--ash); position: relative; z-index: 2;
-  opacity: 0; animation: rise .9s .28s ease forwards;
+  animation: rise .9s .28s ease forwards;
 }
 .ph-count span { color: var(--gold); }
 
@@ -144,7 +141,7 @@ body.EN .en-i { display: inline; }
   display: grid; grid-template-columns: 1fr 280px;
   gap: 0; border-bottom: 1px solid var(--gold-line);
   padding: 56px 0; align-items: start;
-  opacity: 0; animation: rise .8s .1s ease forwards;
+  animation: rise .8s .1s ease forwards;
 }
 .art-featured-badge {
   font-family: var(--mono); font-size: 8px; letter-spacing: 0.55em;

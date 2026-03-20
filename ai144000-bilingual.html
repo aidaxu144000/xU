@@ -75,25 +75,25 @@ body::before {
   color: var(--gold); text-transform: uppercase; margin-bottom: 30px;
   display: flex; align-items: center; gap: 16px;
   position: relative; z-index: 2;
-  opacity: 0; animation: rise 1s 0.08s ease forwards;
+  animation: rise 1s 0.08s ease forwards;
 }
 .eyebrow::after { content: ''; width: 40px; height: 1px; background: linear-gradient(to right, var(--gold), transparent); opacity: 0.45; }
 
 .hero-title-th {
   font-family: var(--body-th); font-size: clamp(2.5rem, 6vw, 4.2rem);
   font-weight: 700; line-height: 1.2; color: var(--light); margin-bottom: 26px;
-  position: relative; z-index: 2; opacity: 0; animation: rise 1s 0.18s ease forwards;
+  position: relative; z-index: 2; animation: rise 1s 0.18s ease forwards;
 }
 .hero-title-th em { font-style: normal; color: var(--gold); display: block; }
 
 .hero-title-en {
   font-family: var(--serif-en); font-size: clamp(2.3rem, 5.5vw, 3.8rem);
   font-weight: 400; line-height: 1.15; color: var(--light); margin-bottom: 26px;
-  position: relative; z-index: 2; opacity: 0; animation: rise 1s 0.18s ease forwards;
+  position: relative; z-index: 2; animation: rise 1s 0.18s ease forwards;
 }
 .hero-title-en em { font-style: italic; color: var(--gold); }
 
-.hero-sub { max-width: 620px; position: relative; z-index: 2; border-left: 2px solid var(--gold); padding-left: 22px; opacity: 0; animation: rise 1s 0.3s ease forwards; }
+.hero-sub { max-width: 620px; position: relative; z-index: 2; border-left: 2px solid var(--gold); padding-left: 22px; animation: rise 1s 0.3s ease forwards; }
 .hero-sub-th { font-family: var(--body-th); font-weight: 300; font-size: 1rem; color: var(--ash); line-height: 1.85; }
 .hero-sub-en { font-family: var(--body-en); font-style: italic; font-size: 1.08rem; color: var(--ash); line-height: 1.75; }
 .hero-scroll {
@@ -173,11 +173,8 @@ footer { text-align: center; padding: 54px 0 80px; border-top: 1px solid var(--g
 /* ── LANGUAGE VISIBILITY ── */
 /* Thai mode: show Thai, hide English */
 body.lang-th .en-only { display: none !important; }
-body.lang-th .th-only { display: block; }
 body.lang-th .hero-title-en { display: none !important; }
-body.lang-th .hero-title-th { display: block; }
 body.lang-th .hero-sub-en { display: none !important; }
-body.lang-th .hero-sub-th { display: block; }
 body.lang-th p.lead-en { display: none !important; }
 body.lang-th p.lead-th { display: block; }
 body.lang-th h2.en { display: none !important; }
@@ -187,15 +184,11 @@ body.lang-th h3.th { display: block; }
 body.lang-th blockquote.en-q { display: none !important; }
 body.lang-th blockquote.th-q { display: block; }
 body.lang-th .en-content { display: none !important; }
-body.lang-th .th-content { display: block; }
 
 /* English mode: show English, hide Thai */
 body.lang-en .th-only { display: none !important; }
-body.lang-en .en-only { display: block; }
 body.lang-en .hero-title-th { display: none !important; }
-body.lang-en .hero-title-en { display: block; }
 body.lang-en .hero-sub-th { display: none !important; }
-body.lang-en .hero-sub-en { display: block; }
 body.lang-en p.lead-th { display: none !important; }
 body.lang-en p.lead-en { display: block; }
 body.lang-en h2.th { display: none !important; }
@@ -205,7 +198,6 @@ body.lang-en h3.en { display: block; }
 body.lang-en blockquote.th-q { display: none !important; }
 body.lang-en blockquote.en-q { display: block; }
 body.lang-en .th-content { display: none !important; }
-body.lang-en .en-content { display: block; }
 
 /* Note: children handle their own visibility */
 body.lang-th .note p.en { display: none !important; }
@@ -231,7 +223,7 @@ body.lang-en .home-box p.en { display: block; }
 }
 </style>
 </head>
-<body class="TH">
+<body class="lang-th">
 
 <nav class="masthead">
   <span class="brand">AI144000 · Transmission</span>
